@@ -85,15 +85,24 @@ def generate_ddl(df):
     
     return
 
+def check_params():
+    '''
+    return TRue if params available
+    '''
+    n_params = len(sys.argv)
+
+    if n_params > 1:
+        return True
+    else:
+        return False
+
 #
 # main
 #
 if __name__ == "__main__":
 
     # check if command line parameters passed
-    n_params = len(sys.argv)
- 
-    if(n_params > 1):
+    if(check_params()):
         # file name passed as first params
         FILE_NAME = sys.argv[1]
     else:
