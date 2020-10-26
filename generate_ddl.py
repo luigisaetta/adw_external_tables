@@ -88,22 +88,29 @@ def generate_ddl(df):
 #
 # main
 #
+if __name__ == "__main__":
 
-# check if commad line parameters passed
-n_params = len(sys.argv)
+    # check if command line parameters passed
+    n_params = len(sys.argv)
  
-if(n_params > 1):
-    # file name passed as params
-    FILE_NAME = sys.argv[1]
-else:
-    print('Using internally defined file name!')
-print()
+    if(n_params > 1):
+        # file name passed as first params
+        FILE_NAME = sys.argv[1]
+    else:
+        print('Using internally defined file name!')
+    print()
 
-print('File name is: ', FILE_NAME)
+    print('File name is: ', FILE_NAME)
 
-my_df = pd.read_csv(FILE_NAME, sep=',')
+    my_df = pd.read_csv(FILE_NAME, sep=',')
 
-generate_ddl(my_df)
+    print('Visualizing first rows...')
+    print(my_df.head(2))
+    print()
+
+    generate_ddl(my_df)
+
+    sys.exit(0)
 
 
 
