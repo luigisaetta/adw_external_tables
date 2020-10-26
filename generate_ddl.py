@@ -12,25 +12,30 @@ dict_mappings['object'] = 'VARCHAR2(2000)'
 #
 # constants and parameters
 #
+
+# you should change here settings for your case
+
+# FILE_NAME can also be passed as command line param
 FILE_NAME = 'movies.csv'
 
-# This is the base_url for the region where the bucket is
+# This is the base_url for the region where the Object Storage bucket is
 BASE_URL = 'https://objectstorage.eu-frankfurt-1.oraclecloud.com/n/'
 
-# the name for the external table
+# the name for the external table to be created
 TABLE_NAME = 'MOVIES_EXT'
 
+# data for accessing Object Storage
 NAMESPACE = 'emease'
 BUCKET_NAME = 'datalake_in'
 CREDENTIAL_NAME = 'ADWH2'
 
-# end constant sections
+# end constant section
 
+#
 # functions
+#
 
-#
 # function to generate ddl
-#
 def generate_ddl(df):
     '''
     df: Pandas DataFrame
@@ -85,6 +90,7 @@ def generate_ddl(df):
     
     return
 
+# function to check params
 def check_params():
     '''
     return TRue if params available
