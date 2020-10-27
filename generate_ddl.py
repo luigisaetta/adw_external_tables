@@ -27,7 +27,7 @@ BASE_URL = 'https://objectstorage.eu-frankfurt-1.oraclecloud.com/n/'
 TABLE_NAME = 'TEST1_EXT'
 
 # data for accessing Object Storage
-NAMESPACE = 'emeaseitalyproxima'
+NAMESPACE = 'emeaseitalyp'
 BUCKET_NAME = 'datalake_in'
 CREDENTIAL_NAME = 'ADWH2'
 
@@ -145,7 +145,7 @@ if __name__ == "__main__":
 
 
     # read from csv file in DataFrame
-    my_df = pd.read_csv(FILE_NAME, sep=';' , nrows=MAX_ROWS)
+    my_df = pd.read_csv(FILE_NAME, sep=',' , nrows=MAX_ROWS)
 
     print('Visualizing first rows...')
     print()
