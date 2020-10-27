@@ -1,6 +1,9 @@
-## Utility for easy handling of ADWH external tables
+## Utilities for easy creation of ADWH external tables
 
-26/10/2020
+* handling CSV file
+* parquet... next
+
+27/10/2020
 
 With this utility you can read a csv file and generate the DDL to create an Oracle external table
 enabling to access the file, stored in OCI Object Storage, from Oracle Autonomous ADWH
