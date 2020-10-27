@@ -9,13 +9,14 @@ If you want to use it locally, you must have a Python environment with Pandas in
  
 Then usage is:
 
-python generate_ddl.py file.csv
+python generate_ddl.py file.csv <table_name>
 
 the DDL is printed on standard output.
 
 #### This is an example of the output:
 
 File name is:  movies.csv
+
 Generating DDL for table:  MOVIES_EXT
 
 BEGIN
