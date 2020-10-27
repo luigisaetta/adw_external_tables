@@ -2,32 +2,37 @@ import sys
 import pandas as pd
 
 # This is the dictionary of supported mappings
+# (for now no DATE types)
 dict_mappings = {}
 dict_mappings['int32'] = 'NUMBER'
 dict_mappings['int64'] = 'NUMBER'
 dict_mappings['float32'] = 'NUMBER'
 dict_mappings['float64'] = 'NUMBER'
-dict_mappings['object'] = 'VARCHAR2(2000)'
+dict_mappings['object'] = 'VARCHAR2(4000)'
 
 #
 # constants and parameters
 #
 
 # you should change here settings for your case
-
+# for large files read from csv max_rows 
+MAX_ROWS = 1000
 # FILE_NAME can also be passed as command line param
-FILE_NAME = 'movies.csv'
+FILE_NAME = 'test1.csv'
 
 # This is the base_url for the region where the Object Storage bucket is
 BASE_URL = 'https://objectstorage.eu-frankfurt-1.oraclecloud.com/n/'
 
 # the name for the external table to be created
-TABLE_NAME = 'MOVIES_EXT'
+TABLE_NAME = 'TEST1_EXT'
 
 # data for accessing Object Storage
-NAMESPACE = 'emease'
+NAMESPACE = 'emeaseitalyproxima'
 BUCKET_NAME = 'datalake_in'
 CREDENTIAL_NAME = 'ADWH2'
+
+# for csv with delimiter ; you should add to format
+# 'delimiter' value ';'
 
 # end constant section
 
@@ -93,14 +98,31 @@ def generate_ddl(df):
 # function to check params
 def check_params():
     '''
-    return TRue if params available
+    expect file_name, table_name
+    return True if two params available
     '''
     n_params = len(sys.argv)
 
-    if n_params > 1:
+    if n_params > 2:
         return True
     else:
         return False
+
+def print_usage():
+    print()
+    print('Not enough parameters found...')
+    print()
+    print('Usage: python generate_ddl.py <file_name> <table_name>')
+    print('')
+
+def info():
+    print('Running with:') 
+    print('file name: %s, table name: %s ' %(FILE_NAME, TABLE_NAME))
+    print('Namespace: ', NAMESPACE)
+    print('Bucket: ', BUCKET_NAME)
+    print('Credential name: ', CREDENTIAL_NAME)
+
+    print()
 
 #
 # main
@@ -111,16 +133,23 @@ if __name__ == "__main__":
     if(check_params()):
         # file name passed as first params
         FILE_NAME = sys.argv[1]
+        TABLE_NAME = sys.argv[2]
     else:
-        print('Using internally defined file name!')
+        print_usage()
+        sys.exit(-1)
+
     print()
 
-    print('File name is: ', FILE_NAME)
+    # print running info
+    info()
 
-    my_df = pd.read_csv(FILE_NAME, sep=',')
+
+    # read from csv file in DataFrame
+    my_df = pd.read_csv(FILE_NAME, sep=';' , nrows=MAX_ROWS)
 
     print('Visualizing first rows...')
-    print(my_df.head(2))
+    print()
+    print(my_df.head(5))
     print()
 
     generate_ddl(my_df)
