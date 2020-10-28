@@ -53,7 +53,7 @@ def generate_ddl(df):
     PART_INITIAL = "BEGIN\n \tDBMS_CLOUD.CREATE_EXTERNAL_TABLE("
     PART_END = "\t); \nEND; \n/"
     
-    FORMAT_STRING = "format => json_object('type' value 'csv', 'skipheaders' value '1'),"
+    FORMAT_STRING = "format => json_object('type' value 'csv', 'skipheaders' value '1', 'ignoremissingcolumns' value 'true'),"
     FILE_URL = BASE_URL + NAMESPACE + '/b/' + BUCKET_NAME + '/o/' + FILE_NAME
     PART_TABLE_NAME = "table_name =>'" + TABLE_NAME + "',"
     PART_CREDENTIAL_NAME = "credential_name =>'" + CREDENTIAL_NAME + "',"
